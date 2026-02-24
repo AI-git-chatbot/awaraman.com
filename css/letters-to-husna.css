@@ -1,0 +1,217 @@
+/* ─── Letters Page Styles ───────────────────────────────── */
+
+.letters-overlay {
+    background: linear-gradient(to bottom,
+            rgba(14, 13, 11, 0.3) 0%,
+            rgba(14, 13, 11, 0.2) 40%,
+            rgba(14, 13, 11, 0.95) 100%) !important;
+}
+
+.letters-section {
+    padding: 80px 0 100px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+}
+
+.letters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+}
+
+/* Letter Card */
+.letter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    cursor: default;
+}
+
+.letter-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(201, 168, 76, 0.3);
+    box-shadow: var(--shadow-card);
+}
+
+.letter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.letter-number {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.letter-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.letter-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    filter: brightness(0.8) contrast(1.05);
+    transition: filter 0.4s ease;
+}
+
+.letter-card:hover .letter-img {
+    filter: brightness(0.95);
+}
+
+.letter-body {
+    padding: 28px;
+}
+
+.letter-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+}
+
+.letter-preview {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 22px;
+    font-style: italic;
+}
+
+.btn-sm {
+    padding: 10px 22px;
+    font-size: 0.78rem;
+}
+
+/* ── Letter Modal ───────────────────────────────────────── */
+.letter-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(0, 0, 0, 0.88);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.letter-modal.open {
+    display: flex;
+}
+
+.letter-modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 900px;
+    max-height: 88vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition), color var(--transition);
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: var(--gold);
+    color: #0e0d0b;
+}
+
+.modal-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+}
+
+.modal-img-wrap {
+    overflow: hidden;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.modal-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85) contrast(1.05);
+}
+
+.modal-text {
+    padding: 48px 40px;
+}
+
+.modal-title {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.modal-body {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.9;
+    white-space: pre-wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .letters-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-img-wrap {
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        max-height: 240px;
+    }
+
+    .modal-text {
+        padding: 28px 24px;
+    }
+}

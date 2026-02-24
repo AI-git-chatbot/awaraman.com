@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Letters to Husna - A collection of heartfelt letters and articles that resonate with love, nostalgia, and personal reflections.">
+    <title>Letters to Husna</title>
+    <link rel="stylesheet" href="letters-to-husna.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="hero-section">
+        <nav class="navbar">
+            <div class="container">
+                <div class="brand">
+                    <a href="index.html"><img src="images/logo.JPG" alt="Awaraman Logo" style="width: 100px; height: auto; margin-right: 10px;">Awaraman</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="books.html">Books</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="letters-to-husna.html">Letters to Husna</a></li>
+                    <li><a href="thoughts.html">Thoughts</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1 class="hero-heading">Letters to Husna</h1>
+            <p class="hero-description">Words that speak to the soul, wrapped in old letters and timeless memories.</p>
+        </div>
+    </header>
+
+    <!-- Letters Section -->
+    <section id="letters" class="letters-section">
+        <div class="container">
+            <h2 class="section-title">Recent Letters</h2>
+            <div class="letters-grid">
+                <article class="letter">
+                    <h3>To Husna, With Love</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum...</p>
+                    <a href="letter1.html" class="read-more">Read More</a>
+                </article>
+                <article class="letter">
+                    <h3>Dreaming Together</h3>
+                    <p>Suspendisse cursus felis eu arcu dictum, nec pharetra erat placerat. Cras vestibulum orci quis eros...</p>
+                    <a href="letter2.html" class="read-more">Read More</a>
+                </article>
+                <article class="letter">
+                    <h3>Memories of a Rainy Evening</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum odio sit amet mi...</p>
+                    <a href="letter3.html" class="read-more">Read More</a>
+                </article>
+                <article class="letter">
+                    <h3>Stars Above the Desert</h3>
+                    <p>Mauris tempor risus nec nulla consectetur, eget viverra nulla interdum. Aenean id erat massa...</p>
+                    <a href="letter4.html" class="read-more">Read More</a>
+                </article>
+                <article class="letter">
+                    <h3>A Walk Through Time</h3>
+                    <p>Aliquam condimentum metus ac ligula varius, et posuere libero egestas. Etiam vel turpis feugiat...</p>
+                    <a href="letter5.html" class="read-more">Read More</a>
+                </article>
+                <article class="letter">
+                    <h3>Finding Beauty in Chaos</h3>
+                    <p>Sed sit amet lacus in augue bibendum ullamcorper et eget sapien. Suspendisse potenti...</p>
+                    <a href="letter6.html" class="read-more">Read More</a>
+                </article>
+                <!-- More letters can be added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Letters -->
+    <div id="letterModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-image">
+                <img src="" alt="Letter Image" id="modalImage">
+            </div>
+            <div class="modal-text">
+                <h3 id="modalTitle">Title</h3>
+                <p id="modalContent">Content goes here...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Awaraman. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#"><img src="images/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="images/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="images/twitter-icon.png" alt="Twitter"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Modal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('letterModal');
+            const closeButton = document.querySelector('.close-button');
+            const letters = document.querySelectorAll('.letter');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            letters.forEach(letter => {
+                letter.addEventListener('click', function() {
+                    const imgSrc = letter.querySelector('img') ? letter.querySelector('img').src : 'images/default.jpg';
+                    const title = letter.querySelector('h3').innerText;
+                    const content = letter.querySelector('p').innerText;
+
+                    modalImage.src = imgSrc;
+                    modalTitle.innerText = title;
+                    modalContent.innerText = content;
+                    modal.style.display = 'flex';
+                });
+            });
+
+            closeButton.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+/* ─── Books Page Styles ─────────────────────────────────── */
+
+.hero-short {
+    height: 60vh;
+    min-height: 420px;
+}
+
+.books-section {
+    padding: 80px 0 100px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.book-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.book-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(201, 168, 76, 0.3);
+    box-shadow: var(--shadow-card);
+}
+
+.book-cover-wrap {
+    overflow: hidden;
+    background: #12110e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    min-height: 220px;
+}
+
+.book-cover {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    transition: transform 0.45s ease;
+}
+
+.book-card:hover .book-cover {
+    transform: scale(1.06);
+}
+
+.book-body {
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-author {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+.book-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+
+.book-desc {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 14px;
+}
+
+.book-stars {
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .books-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 540px) {
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+}

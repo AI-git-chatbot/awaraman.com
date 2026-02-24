@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Awaraman - Travel stories, tips, and adventures from around the globe by a travel influencer, writer, and blogger.">
+    <title>Awaraman | Travel Blog & Adventures</title>
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="hero-section" style="background: url('images/hero-bg.jpg') no-repeat center center/cover; height: 100vh; position: relative;">
+ <nav class="navbar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="brand" style="display: flex; align-items: center;">
+            <img src="images/logo.JPG" alt="Awaraman Logo" style="width: 100px; height: auto; margin-right: 5px;">
+            <a href="index.html">Awaraman</a>
+        </div>
+        <ul class="nav-links" style="display: flex; gap: 20px;">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="letters-to-husna.html">Letters to Husna</a></li>
+            <li><a href="thoughts.html">Thoughts</a></li>
+            <li><a href="#Blogs">Blogs</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+        <div class="hero-content">
+            <h1 class="hero-heading">Exploring the World, One Story at a Time</h1>
+            <p class="hero-description">Join me on my adventures, exploring breathtaking places, finding hidden gems, and sharing travel insights from around the globe.</p>
+            <a href="#blog" class="cta-button">Read the Blog</a>
+        </div>
+        <div class="scroll-down-indicator">
+            <a href="#about"><img src="images/scroll-down.gif" alt="Scroll down" style="width: 50px; height: 50px;"></a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-section" style="background: url('images/about-me.jpg') no-repeat center center/cover; position: relative; padding: 100px 20px; color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);">
+        <div class="container" style="background: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px; max-width: 800px;">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>Hi, I’m Aman, the face behind Awaraman. A passionate traveler, writer, and blogger, I’ve set out to explore the world and share my experiences with you. Whether it's the towering peaks of the Himalayas or the colorful streets of Kochi, my mission is to inspire you to discover the beauty around us. Follow my journey as I share travel stories, tips, and guides to help make your own adventures extraordinary.</p>
+                <a href="about.html" class="read-more-button">Read More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Blog Section -->
+    <section id="blog" class="featured-blog-section">
+        <div class="container">
+            <h2>Latest Blog Posts</h2>
+            <div class="blog-posts">
+                <article class="blog-post">
+                    <img src="images/blog1.jpg" alt="Mountain Adventure">
+                    <div class="blog-content">
+                        <h3><a href="#">5 Breathtaking Mountain Adventures You Must Experience</a></h3>
+                        <p>Find out about the best mountain experiences I've had, from the peaks of Nepal to the hills of Manali...</p>
+                    </div>
+                </article>
+                <article class="blog-post">
+                    <img src="images/blog2.jpg" alt="City Exploration">
+                    <div class="blog-content">
+                        <h3><a href="#">Exploring the Hidden Gems of Kochi</a></h3>
+                        <p>Discover the lesser-known attractions of Kochi that every traveler must explore...</p>
+                    </div>
+                </article>
+                <article class="blog-post">
+                    <img src="images/blog3.jpg" alt="Travel Tips">
+                    <div class="blog-content">
+                        <h3><a href="#">10 Essential Travel Tips for Your Next Adventure</a></h3>
+                        <p>Before your next journey, make sure to check out these essential travel tips to ensure a smooth adventure...</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2>Travel Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/gallery1.jpg" alt="Sunset in the Mountains">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery2.jpg" alt="Cityscape at Night">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery3.jpg" alt="Cultural Festival">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery4.jpg" alt="Beach Paradise">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>Have questions or want to collaborate? Feel free to reach out!</p>
+            <form action="contact.php" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Awaraman. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#"><img src="images/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="images/instagram-icon.png" alt="Instagram"></a>
+                <a href="#"><img src="images/twitter-icon.png" alt="Twitter"></a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

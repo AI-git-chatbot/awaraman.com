@@ -1,0 +1,114 @@
+/* ─── Thoughts Page Styles ──────────────────────────────── */
+
+.hero-short {
+    height: 60vh;
+    min-height: 420px;
+}
+
+.thoughts-section {
+    padding: 80px 0 100px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+}
+
+/* Masonry-style responsive grid mixing cards and quote tiles */
+.thoughts-masonry {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+    align-items: start;
+}
+
+.card-img-wrap {
+    overflow: hidden;
+}
+
+/* ── Quote / photo tile ─────────────────────────────────── */
+.thought-quote-tile {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.thought-quote-tile:hover {
+    transform: translateY(-6px);
+    border-color: rgba(91, 158, 201, 0.28);
+    box-shadow: var(--shadow-card);
+}
+
+.thought-quote-tile.wide {
+    grid-column: span 2;
+}
+
+.tqt-img-wrap {
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+.tqt-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.4s ease;
+    filter: brightness(0.82) contrast(1.06);
+}
+
+.thought-quote-tile:hover .tqt-img-wrap img {
+    transform: scale(1.05);
+    filter: brightness(0.95) contrast(1.06);
+}
+
+.tqt-body {
+    padding: 24px 28px 28px;
+}
+
+.tqt-text {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.55;
+    margin-bottom: 10px;
+}
+
+.tqt-caption {
+    display: block;
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 10px;
+    font-style: normal;
+}
+
+.tqt-meta {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .thoughts-masonry {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .thought-quote-tile.wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .thoughts-masonry {
+        grid-template-columns: 1fr;
+    }
+
+    .thought-quote-tile.wide {
+        grid-column: span 1;
+    }
+}

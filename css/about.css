@@ -1,0 +1,165 @@
+/* ─── About Page Styles ─────────────────────────────────── */
+
+.about-main {
+    padding: 100px 0;
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+}
+
+.about-bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 72px;
+    align-items: start;
+}
+
+.about-portrait {
+    position: relative;
+}
+
+.about-portrait img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    filter: brightness(0.92) contrast(1.04) grayscale(0.1);
+}
+
+.portrait-caption {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.portrait-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--white);
+    font-weight: 600;
+}
+
+.portrait-role {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.about-bio p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.85;
+    margin-bottom: 20px;
+}
+
+.about-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+/* Pillars */
+.about-pillars {
+    padding: 100px 0;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.pillar-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.pillar-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(201, 168, 76, 0.3);
+    box-shadow: var(--shadow-card);
+}
+
+.pillar-icon {
+    font-size: 2rem;
+    margin-bottom: 18px;
+}
+
+.pillar-card h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--white);
+    margin-bottom: 12px;
+}
+
+.pillar-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/* CTA */
+.about-cta {
+    padding: 100px 0;
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .pillars-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-bio-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .about-portrait img {
+        aspect-ratio: 4/3;
+    }
+
+    .about-stats {
+        gap: 24px;
+    }
+
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
+}
