@@ -500,6 +500,43 @@ img {
   gap: 10px;
 }
 
+/* ── Footer Newsletter CTA ──────────────────────────────── */
+.footer-newsletter-cta {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  padding: 40px 24px;
+}
+
+.footer-nl-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-nl-text h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.footer-nl-text p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  .footer-nl-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 /* ── Footer ──────────────────────────────────────────────── */
 .footer {
   background: #090807;

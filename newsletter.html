@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Contact Awaraman — reach out for collaborations, questions, or just to say hello.">
-    <title>Contact | Awaraman</title>
+        content="Subscribe to the Awaraman newsletter — travel stories, letters and reflections delivered straight to your inbox.">
+    <title>Newsletter | Awaraman</title>
     <link rel="icon" href="images/logo.JPG" type="image/jpeg">
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/newsletter.css">
 </head>
 
 <body>
@@ -28,8 +28,8 @@
                 <li><a href="letters-to-husna.html">Letters</a></li>
                 <li><a href="thoughts.html">Thoughts</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="newsletter.html">Newsletter</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="newsletter.html" class="active">Newsletter</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="hamburger" aria-label="Toggle navigation">
                 <span></span><span></span><span></span>
@@ -50,85 +50,84 @@
 
     <!-- Hero -->
     <header class="hero-section hero-short">
-        <div class="hero-bg" style="background-image: url('images/blog4.JPG');"></div>
+        <div class="hero-bg" style="background-image: url('images/hero-bg.jpg');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-tag">— Reach Out —</span>
-            <h1 class="hero-title">Let's <em>Connect</em></h1>
-            <p class="hero-desc">Questions, collaborations, or just a hello — I'm always happy to hear from fellow
-                wanderers.</p>
+            <span class="hero-tag">— Stay in the Loop —</span>
+            <h1 class="hero-title">Join the <em>Journey</em></h1>
+            <p class="hero-desc">Stories from the road, letters from the heart — delivered straight to your inbox.</p>
         </div>
     </header>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
         <div class="container">
-            <div class="contact-grid">
+            <div class="newsletter-grid">
 
-                <!-- Info -->
-                <div class="contact-info reveal">
-                    <span class="section-label">Get in Touch</span>
-                    <h2 class="section-title">Say Hello.</h2>
+                <!-- What you'll get -->
+                <div class="newsletter-info reveal">
+                    <span class="section-label">The Newsletter</span>
+                    <h2 class="section-title">Words Worth Waiting For.</h2>
                     <div class="gold-rule"></div>
-                    <p>Whether you're a brand, a fellow traveller, a reader who wants to share something, or just
-                        someone who found these words and felt understood — my inbox is open.</p>
+                    <p>No spam, no noise. Just honest writing from a wanderer who believes some things are best said
+                        slowly, in long form, with a cup of chai nearby.</p>
 
-                    <div class="contact-items">
-                        <div class="contact-item">
-                            <div class="contact-item-icon">📸</div>
-                            <div>
-                                <div class="contact-item-label">Instagram</div>
-                                <a href="https://www.instagram.com/awaraman_/" target="_blank" rel="noopener"
-                                    class="contact-item-value">@awaraman_</a>
+                    <div class="newsletter-perks">
+                        <div class="newsletter-perk">
+                            <div class="perk-icon">✈️</div>
+                            <div class="perk-text">
+                                <strong>Travel Stories</strong>
+                                <span>Raw, unfiltered dispatches from the places I wander through.</span>
                             </div>
                         </div>
-                        <div class="contact-item">
-                            <div class="contact-item-icon">✉️</div>
-                            <div>
-                                <div class="contact-item-label">Email</div>
-                                <a href="mailto:hello@awaraman.com" class="contact-item-value">hello@awaraman.com</a>
+                        <div class="newsletter-perk">
+                            <div class="perk-icon">📖</div>
+                            <div class="perk-text">
+                                <strong>Letters &amp; Reflections</strong>
+                                <span>Personal essays and letters — the kind you save and reread.</span>
                             </div>
                         </div>
-                        <div class="contact-item">
-                            <div class="contact-item-icon">🌍</div>
-                            <div>
-                                <div class="contact-item-label">Location</div>
-                                <span class="contact-item-value">India · Wandering Everywhere</span>
+                        <div class="newsletter-perk">
+                            <div class="perk-icon">📚</div>
+                            <div class="perk-text">
+                                <strong>Books &amp; Reads</strong>
+                                <span>What I'm reading, what moved me, what you should pick up next.</span>
+                            </div>
+                        </div>
+                        <div class="newsletter-perk">
+                            <div class="perk-icon">🌙</div>
+                            <div class="perk-text">
+                                <strong>Quiet Thoughts</strong>
+                                <span>Musings sent at irregular intervals — only when something is worth saying.</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Form -->
-                <div class="contact-form-wrap reveal reveal-delay-1">
-                    <form class="contact-form" id="contactForm">
+                <!-- Subscribe form -->
+                <div class="newsletter-form-wrap reveal reveal-delay-1">
+                    <h3>Subscribe</h3>
+                    <p>Join wanderers who read slowly and think deeply. One email at a time.</p>
+
+                    <form class="newsletter-form" id="newsletterForm">
                         <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="Aman Rao" required>
+                            <label for="nl-name">Your Name</label>
+                            <input type="text" id="nl-name" name="name" placeholder="Your name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" placeholder="hello@example.com" required>
+                            <label for="nl-email">Your Email</label>
+                            <input type="email" id="nl-email" name="email" placeholder="hello@example.com" required>
                         </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="Collaboration / Hello / etc.">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" placeholder="Write your message here..." rows="6"
-                                required></textarea>
-                        </div>
-                        <!-- Newsletter opt-in -->
-                        <label class="form-check" for="newsletter">
-                            <input type="checkbox" id="newsletter" name="newsletter" value="yes">
-                            <span class="form-check-label">Subscribe me to the Awaraman newsletter — new stories,
-                                travel updates &amp; letters delivered to your inbox.</span>
-                        </label>
-                        <button type="submit" class="btn btn-primary" id="contactSubmitBtn"
-                            style="width:100%">Send Message</button>
-                        <div class="form-status" id="contactStatus"></div>
+                        <!-- Hidden field to identify this as newsletter signup -->
+                        <input type="hidden" name="_subject" value="New Newsletter Subscriber — Awaraman">
+                        <input type="hidden" name="type" value="newsletter_subscription">
+                        <button type="submit" class="btn btn-primary" id="nlSubmitBtn"
+                            style="width:100%">Subscribe Now</button>
+                        <div class="form-status" id="nlStatus"></div>
                     </form>
+
+                    <p class="newsletter-note">🔒 Your email is safe. No spam, ever. Unsubscribe anytime by replying
+                        "unsubscribe" to any email.</p>
                 </div>
 
             </div>
@@ -136,18 +135,6 @@
     </section>
 
     <footer class="footer">
-        <div class="footer-newsletter-cta">
-            <div class="container">
-                <div class="footer-nl-inner">
-                    <div class="footer-nl-text">
-                        <span class="section-label">Stay Connected</span>
-                        <h3>Join the Journey</h3>
-                        <p>New stories, travel reflections &amp; letters — straight to your inbox.</p>
-                    </div>
-                    <a href="newsletter.html" class="btn btn-outline">Subscribe to Newsletter</a>
-                </div>
-            </div>
-        </div>
         <div class="footer-inner">
             <div class="footer-brand">
                 <span class="brand-name">Awara<span>man</span></span>
@@ -191,38 +178,38 @@
 
     <script src="js/global.js"></script>
     <script>
-        // ── Contact Form — Formspree async submit ──────────────
-        const contactForm = document.getElementById('contactForm');
-        const contactBtn = document.getElementById('contactSubmitBtn');
-        const contactStatus = document.getElementById('contactStatus');
+        // ── Newsletter Form — Formspree async submit ───────────
+        const nlForm = document.getElementById('newsletterForm');
+        const nlBtn = document.getElementById('nlSubmitBtn');
+        const nlStatus = document.getElementById('nlStatus');
 
-        contactForm.addEventListener('submit', async function (e) {
+        nlForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            const originalText = contactBtn.textContent;
-            contactBtn.textContent = 'Sending…';
-            contactBtn.classList.add('btn-loading');
-            contactStatus.className = 'form-status';
-            contactStatus.textContent = '';
+            const originalText = nlBtn.textContent;
+            nlBtn.textContent = 'Subscribing…';
+            nlBtn.classList.add('btn-loading');
+            nlStatus.className = 'form-status';
+            nlStatus.textContent = '';
 
             try {
                 const response = await fetch('https://formspree.io/f/hello@awaraman.com', {
                     method: 'POST',
-                    body: new FormData(contactForm),
+                    body: new FormData(nlForm),
                     headers: { 'Accept': 'application/json' }
                 });
                 if (response.ok) {
-                    contactStatus.className = 'form-status success';
-                    contactStatus.textContent = '✓ Message sent! I\'ll get back to you soon.';
-                    contactForm.reset();
+                    nlStatus.className = 'form-status success';
+                    nlStatus.textContent = '✓ You\'re subscribed! Welcome to the journey.';
+                    nlForm.reset();
                 } else {
                     throw new Error('Server error');
                 }
             } catch {
-                contactStatus.className = 'form-status error';
-                contactStatus.textContent = '⚠ Something went wrong. Please email hello@awaraman.com directly.';
+                nlStatus.className = 'form-status error';
+                nlStatus.textContent = '⚠ Something went wrong. Please try again or email hello@awaraman.com.';
             } finally {
-                contactBtn.textContent = originalText;
-                contactBtn.classList.remove('btn-loading');
+                nlBtn.textContent = originalText;
+                nlBtn.classList.remove('btn-loading');
             }
         });
     </script>
