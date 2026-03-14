@@ -183,6 +183,8 @@
         const nlBtn = document.getElementById('nlSubmitBtn');
         const nlStatus = document.getElementById('nlStatus');
 
+        const BREVO_KEY = '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';
+
         nlForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const originalText = nlBtn.textContent;
@@ -191,33 +193,42 @@
             nlStatus.className = 'form-status';
             nlStatus.textContent = '';
 
+            const userEmail = document.getElementById('nl-email').value;
+            const userName  = document.getElementById('nl-name').value;
+
             const data = new FormData(nlForm);
             const payload = Object.fromEntries(data.entries());
-            // Inject Formsubmit config directly into payload for reliability
-            payload['_replyto']      = document.getElementById('nl-email').value;
-            payload['_subject']      = 'Welcome to the journey';
-            payload['_autoresponse'] = 'Namaste Ji,\n\nYou\'re in. Thank you for subscribing to Awaraman.\n\nThis inbox will occasionally receive stories from places I\'ve been, thoughts I\'ve had, and letters I\'ve written. Nothing rushed, nothing spammy, just honest writing when something is worth sharing.\n\nSee you on the road.\n\nAman';
-            payload['_template']     = 'table';
+            payload['_subject']  = 'New Newsletter Subscriber — Awaraman';
+            payload['_template'] = 'table';
 
             try {
-                const response = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
+                // 1. Notify Aman of new subscriber via Formsubmit
+                const fsRes = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-                const result = await response.json();
-                if (result.success === 'true') {
+                const fsResult = await fsRes.json();
+                const notified = fsResult.success === 'true' || (fsResult.message && fsResult.message.toLowerCase().includes('activation'));
+
+                // 2. Send branded welcome email to subscriber via Brevo
+                await fetch('https://api.brevo.com/v3/smtp/email', {
+                    method: 'POST',
+                    headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sender: { name: 'Aman | Awaraman', email: 'hello@awaraman.com' },
+                        to: [{ email: userEmail, name: userName }],
+                        subject: 'Welcome to the journey',
+                        textContent: 'Namaste Ji,\n\nYou\'re in. Thank you for subscribing to Awaraman.\n\nThis inbox will occasionally receive stories from places I\'ve been, thoughts I\'ve had, and letters I\'ve written. Nothing rushed, nothing spammy, just honest writing when something is worth sharing.\n\nSee you on the road.\n\nAman'
+                    })
+                });
+
+                if (notified) {
                     nlStatus.className = 'form-status success';
                     nlStatus.textContent = '\u2713 You\'re subscribed! Welcome to the journey.';
                     nlForm.reset();
-                } else if (result.message && result.message.toLowerCase().includes('activation')) {
-                    nlStatus.className = 'form-status success';
-                    nlStatus.textContent = '\u2713 Almost there! A one-time activation link was sent to hello@awaraman.com \u2014 once clicked, subscriptions go straight to inbox.';
                 } else {
-                    throw new Error('Server error');
+                    throw new Error('Formsubmit error');
                 }
             } catch {
                 nlStatus.className = 'form-status error';

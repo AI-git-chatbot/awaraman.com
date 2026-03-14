@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Contact Awaraman — reach out for collaborations, questions, or just to say hello.">
+        content="Contact Awaraman â€” reach out for collaborations, questions, or just to say hello.">
     <title>Contact | Awaraman</title>
     <link rel="icon" href="images/logo.JPG" type="image/jpeg">
     <link rel="stylesheet" href="css/global.css">
@@ -53,9 +53,9 @@
         <div class="hero-bg" style="background-image: url('images/blog4.JPG');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-tag">— Reach Out —</span>
+            <span class="hero-tag">â€” Reach Out â€”</span>
             <h1 class="hero-title">Let's <em>Connect</em></h1>
-            <p class="hero-desc">Questions, collaborations, or just a hello — I'm always happy to hear from fellow
+            <p class="hero-desc">Questions, collaborations, or just a hello â€” I'm always happy to hear from fellow
                 wanderers.</p>
         </div>
     </header>
@@ -71,11 +71,11 @@
                     <h2 class="section-title">Say Hello.</h2>
                     <div class="gold-rule"></div>
                     <p>Whether you're a brand, a fellow traveller, a reader who wants to share something, or just
-                        someone who found these words and felt understood — my inbox is open.</p>
+                        someone who found these words and felt understood â€” my inbox is open.</p>
 
                     <div class="contact-items">
                         <div class="contact-item">
-                            <div class="contact-item-icon">📸</div>
+                            <div class="contact-item-icon">ðŸ“¸</div>
                             <div>
                                 <div class="contact-item-label">Instagram</div>
                                 <a href="https://www.instagram.com/awaraman_/" target="_blank" rel="noopener"
@@ -83,17 +83,17 @@
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-item-icon">✉️</div>
+                            <div class="contact-item-icon">âœ‰ï¸</div>
                             <div>
                                 <div class="contact-item-label">Email</div>
                                 <a href="mailto:hello@awaraman.com" class="contact-item-value">hello@awaraman.com</a>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="contact-item-icon">🌍</div>
+                            <div class="contact-item-icon">ðŸŒ</div>
                             <div>
                                 <div class="contact-item-label">Location</div>
-                                <span class="contact-item-value">India · Wandering Everywhere</span>
+                                <span class="contact-item-value">India Â· Wandering Everywhere</span>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                         <!-- Newsletter opt-in -->
                         <label class="form-check" for="newsletter">
                             <input type="checkbox" id="newsletter" name="newsletter" value="yes">
-                            <span class="form-check-label">Subscribe me to the Awaraman newsletter — new stories,
+                            <span class="form-check-label">Subscribe me to the Awaraman newsletter â€” new stories,
                                 travel updates &amp; letters delivered to your inbox.</span>
                         </label>
                         <button type="submit" class="btn btn-primary" id="contactSubmitBtn"
@@ -142,7 +142,7 @@
                     <div class="footer-nl-text">
                         <span class="section-label">Stay Connected</span>
                         <h3>Join the Journey</h3>
-                        <p>New stories, travel reflections &amp; letters — straight to your inbox.</p>
+                        <p>New stories, travel reflections &amp; letters â€” straight to your inbox.</p>
                     </div>
                     <a href="newsletter.html" class="btn btn-outline">Subscribe to Newsletter</a>
                 </div>
@@ -184,17 +184,19 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Awaraman. All Rights Reserved.</p>
+            <p>Â© 2025 Awaraman. All Rights Reserved.</p>
             <p>Made with wanderlust &amp; words.</p>
         </div>
     </footer>
 
     <script src="js/global.js"></script>
     <script>
-        // ── Contact Form — Formsubmit.co async submit ──────────
-        const contactForm = document.getElementById('contactForm');
-        const contactBtn = document.getElementById('contactSubmitBtn');
+        // â”€â”€ Contact Form â€” Formsubmit (notify Aman) + Brevo (auto-reply) â”€â”€
+        const contactForm   = document.getElementById('contactForm');
+        const contactBtn    = document.getElementById('contactSubmitBtn');
         const contactStatus = document.getElementById('contactStatus');
+
+        const BREVO_KEY = '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';
 
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -204,33 +206,42 @@
             contactStatus.className = 'form-status';
             contactStatus.textContent = '';
 
+            const userEmail = document.getElementById('email').value;
+            const userName  = document.getElementById('name').value;
+
             const data = new FormData(contactForm);
             const payload = Object.fromEntries(data.entries());
-            // Inject Formsubmit config directly into payload for reliability
-            payload['_replyto']      = document.getElementById('email').value;
-            payload['_subject']      = 'Thanks for reaching out';
-            payload['_autoresponse'] = 'Namaste Ji,\n\nThanks for writing in, I\'ve received your message and will reply as soon as I can.\n\nAman';
-            payload['_template']     = 'table';
+            payload['_subject']  = 'New Contact Message \u2014 Awaraman';
+            payload['_template'] = 'table';
 
             try {
-                const response = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
+                // 1. Notify Aman via Formsubmit
+                const fsRes = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-                const result = await response.json();
-                if (result.success === 'true') {
+                const fsResult = await fsRes.json();
+                const notified = fsResult.success === 'true' || (fsResult.message && fsResult.message.toLowerCase().includes('activation'));
+
+                // 2. Branded auto-reply to user via Brevo (from hello@awaraman.com)
+                await fetch('https://api.brevo.com/v3/smtp/email', {
+                    method: 'POST',
+                    headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sender: { name: 'Aman | Awaraman', email: 'hello@awaraman.com' },
+                        to: [{ email: userEmail, name: userName }],
+                        subject: 'Thanks for reaching out',
+                        textContent: 'Namaste Ji,\n\nThanks for writing in, I\'ve received your message and will reply as soon as I can.\n\nAman'
+                    })
+                });
+
+                if (notified) {
                     contactStatus.className = 'form-status success';
                     contactStatus.textContent = '\u2713 Message sent! I\'ll get back to you soon.';
                     contactForm.reset();
-                } else if (result.message && result.message.toLowerCase().includes('activation')) {
-                    contactStatus.className = 'form-status success';
-                    contactStatus.textContent = '\u2713 Received! Aman will need to click a one-time activation link in hello@awaraman.com inbox (from Formsubmit) — after that all messages arrive instantly.';
                 } else {
-                    throw new Error('Server error');
+                    throw new Error('error');
                 }
             } catch {
                 contactStatus.className = 'form-status error';
@@ -243,4 +254,4 @@
     </script>
 </body>
 
-</html>
+</html>
