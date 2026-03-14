@@ -204,10 +204,13 @@
                     body: JSON.stringify(payload)
                 });
                 const result = await response.json();
-                if (response.ok && result.success === 'true') {
+                if (result.success === 'true') {
                     nlStatus.className = 'form-status success';
                     nlStatus.textContent = '\u2713 You\'re subscribed! Welcome to the journey.';
                     nlForm.reset();
+                } else if (result.message && result.message.toLowerCase().includes('activation')) {
+                    nlStatus.className = 'form-status success';
+                    nlStatus.textContent = '\u2713 Almost there! A one-time activation link was sent to hello@awaraman.com \u2014 once clicked, subscriptions go straight to inbox.';
                 } else {
                     throw new Error('Server error');
                 }

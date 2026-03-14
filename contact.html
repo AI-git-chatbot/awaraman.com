@@ -217,10 +217,13 @@
                     body: JSON.stringify(payload)
                 });
                 const result = await response.json();
-                if (response.ok && result.success === 'true') {
+                if (result.success === 'true') {
                     contactStatus.className = 'form-status success';
                     contactStatus.textContent = '\u2713 Message sent! I\'ll get back to you soon.';
                     contactForm.reset();
+                } else if (result.message && result.message.toLowerCase().includes('activation')) {
+                    contactStatus.className = 'form-status success';
+                    contactStatus.textContent = '\u2713 Received! Aman will need to click a one-time activation link in hello@awaraman.com inbox (from Formsubmit) — after that all messages arrive instantly.';
                 } else {
                     throw new Error('Server error');
                 }
