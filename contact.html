@@ -191,7 +191,7 @@
 
     <script src="js/global.js"></script>
     <script>
-        // ── Contact Form — Formspree async submit ──────────────
+        // ── Contact Form — Formsubmit.co async submit ──────────
         const contactForm = document.getElementById('contactForm');
         const contactBtn = document.getElementById('contactSubmitBtn');
         const contactStatus = document.getElementById('contactStatus');
@@ -199,27 +199,34 @@
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const originalText = contactBtn.textContent;
-            contactBtn.textContent = 'Sending…';
+            contactBtn.textContent = 'Sending\u2026';
             contactBtn.classList.add('btn-loading');
             contactStatus.className = 'form-status';
             contactStatus.textContent = '';
 
+            const data = new FormData(contactForm);
+            const payload = Object.fromEntries(data.entries());
+
             try {
-                const response = await fetch('https://formspree.io/f/hello@awaraman.com', {
+                const response = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
                     method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: { 'Accept': 'application/json' }
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
                 });
-                if (response.ok) {
+                const result = await response.json();
+                if (response.ok && result.success === 'true') {
                     contactStatus.className = 'form-status success';
-                    contactStatus.textContent = '✓ Message sent! I\'ll get back to you soon.';
+                    contactStatus.textContent = '\u2713 Message sent! I\'ll get back to you soon.';
                     contactForm.reset();
                 } else {
                     throw new Error('Server error');
                 }
             } catch {
                 contactStatus.className = 'form-status error';
-                contactStatus.textContent = '⚠ Something went wrong. Please email hello@awaraman.com directly.';
+                contactStatus.textContent = '\u26a0 Something went wrong. Please email hello@awaraman.com directly.';
             } finally {
                 contactBtn.textContent = originalText;
                 contactBtn.classList.remove('btn-loading');
@@ -228,4 +235,4 @@
     </script>
 </body>
 
-</html>
+</html>

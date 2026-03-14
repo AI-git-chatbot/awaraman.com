@@ -178,7 +178,7 @@
 
     <script src="js/global.js"></script>
     <script>
-        // ── Newsletter Form — Formspree async submit ───────────
+        // ── Newsletter Form — Formsubmit.co async submit ───────
         const nlForm = document.getElementById('newsletterForm');
         const nlBtn = document.getElementById('nlSubmitBtn');
         const nlStatus = document.getElementById('nlStatus');
@@ -186,27 +186,34 @@
         nlForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const originalText = nlBtn.textContent;
-            nlBtn.textContent = 'Subscribing…';
+            nlBtn.textContent = 'Subscribing\u2026';
             nlBtn.classList.add('btn-loading');
             nlStatus.className = 'form-status';
             nlStatus.textContent = '';
 
+            const data = new FormData(nlForm);
+            const payload = Object.fromEntries(data.entries());
+
             try {
-                const response = await fetch('https://formspree.io/f/hello@awaraman.com', {
+                const response = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
                     method: 'POST',
-                    body: new FormData(nlForm),
-                    headers: { 'Accept': 'application/json' }
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
                 });
-                if (response.ok) {
+                const result = await response.json();
+                if (response.ok && result.success === 'true') {
                     nlStatus.className = 'form-status success';
-                    nlStatus.textContent = '✓ You\'re subscribed! Welcome to the journey.';
+                    nlStatus.textContent = '\u2713 You\'re subscribed! Welcome to the journey.';
                     nlForm.reset();
                 } else {
                     throw new Error('Server error');
                 }
             } catch {
                 nlStatus.className = 'form-status error';
-                nlStatus.textContent = '⚠ Something went wrong. Please try again or email hello@awaraman.com.';
+                nlStatus.textContent = '\u26a0 Something went wrong. Please try again or email hello@awaraman.com.';
             } finally {
                 nlBtn.textContent = originalText;
                 nlBtn.classList.remove('btn-loading');
@@ -216,3 +223,4 @@
 </body>
 
 </html>
+
