@@ -102,11 +102,6 @@
                 <!-- Form -->
                 <div class="contact-form-wrap reveal reveal-delay-1">
                     <form class="contact-form" id="contactForm">
-                        <!-- Formsubmit.co config -->
-                        <input type="hidden" name="_replyto" value="">
-                        <input type="hidden" name="_subject" value="New Message — Awaraman Contact Form">
-                        <input type="hidden" name="_autoresponse" value="Namaste Ji,&#10;&#10;Thanks for writing in, I've received your message and will reply as soon as I can.&#10;&#10;Aman">
-                        <input type="hidden" name="_template" value="table">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" placeholder="Aman Rao" required>
@@ -210,9 +205,12 @@
             contactStatus.textContent = '';
 
             const data = new FormData(contactForm);
-            // Set _replyto dynamically so Formsubmit sends auto-reply to the user's email
-            data.set('_replyto', document.getElementById('email').value);
             const payload = Object.fromEntries(data.entries());
+            // Inject Formsubmit config directly into payload for reliability
+            payload['_replyto']      = document.getElementById('email').value;
+            payload['_subject']      = 'Thanks for reaching out';
+            payload['_autoresponse'] = 'Namaste Ji,\n\nThanks for writing in, I\'ve received your message and will reply as soon as I can.\n\nAman';
+            payload['_template']     = 'table';
 
             try {
                 const response = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {

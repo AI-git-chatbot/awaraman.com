@@ -193,6 +193,11 @@
 
             const data = new FormData(nlForm);
             const payload = Object.fromEntries(data.entries());
+            // Inject Formsubmit config directly into payload for reliability
+            payload['_replyto']      = document.getElementById('nl-email').value;
+            payload['_subject']      = 'Welcome to the journey';
+            payload['_autoresponse'] = 'Namaste Ji,\n\nYou\'re in. Thank you for subscribing to Awaraman.\n\nThis inbox will occasionally receive stories from places I\'ve been, thoughts I\'ve had, and letters I\'ve written. Nothing rushed, nothing spammy, just honest writing when something is worth sharing.\n\nSee you on the road.\n\nAman';
+            payload['_template']     = 'table';
 
             try {
                 const response = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
