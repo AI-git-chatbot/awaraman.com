@@ -118,9 +118,23 @@
                             <label for="nl-email">Your Email</label>
                             <input type="email" id="nl-email" name="email" placeholder="hello@example.com" required>
                         </div>
-                        <!-- Hidden field to identify this as newsletter signup -->
+                        <!-- Hidden fields for Formsubmit.co -->
                         <input type="hidden" name="_subject" value="New Newsletter Subscriber — Awaraman">
                         <input type="hidden" name="type" value="newsletter_subscription">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <!-- Auto-reply welcome email sent to subscriber -->
+                        <input type="hidden" id="nl-replyto" name="_replyto" value="">
+                        <input type="hidden" name="_autoresponse" value="Namaste Ji,
+
+You're in. Thank you for subscribing to Awaraman.
+
+This inbox will occasionally receive stories from places I've been, thoughts I've had, and letters I've written. Nothing rushed, nothing spammy — just honest writing when something is worth sharing.
+
+See you on the road.
+
+Aman
+awaraman.com">
                         <button type="submit" class="btn btn-primary" id="nlSubmitBtn"
                             style="width:100%">Subscribe Now</button>
                         <div class="form-status" id="nlStatus"></div>
@@ -179,11 +193,9 @@
     <script src="js/global.js"></script>
     <script>
         // ── Newsletter Form — Formsubmit.co async submit ───────
-        const nlForm = document.getElementById('newsletterForm');
-        const nlBtn = document.getElementById('nlSubmitBtn');
+        const nlForm   = document.getElementById('newsletterForm');
+        const nlBtn    = document.getElementById('nlSubmitBtn');
         const nlStatus = document.getElementById('nlStatus');
-
-        const BREVO_KEY = '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';
 
         nlForm.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -194,44 +206,35 @@
             nlStatus.textContent = '';
 
             const userEmail = document.getElementById('nl-email').value;
-            const userName  = document.getElementById('nl-name').value;
 
-            const data = new FormData(nlForm);
+            // Sync subscriber email into _replyto so Formsubmit sends the welcome auto-reply
+            document.getElementById('nl-replyto').value = userEmail;
+
+            const data    = new FormData(nlForm);
             const payload = Object.fromEntries(data.entries());
-            payload['_subject']  = 'New Newsletter Subscriber — Awaraman';
-            payload['_template'] = 'table';
 
             try {
-                // 1. Notify Aman of new subscriber via Formsubmit
-                const fsRes = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
-                    method: 'POST',
+                const res    = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
+                    method:  'POST',
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body:    JSON.stringify(payload)
                 });
-                const fsResult = await fsRes.json();
-                const notified = fsResult.success === 'true' || (fsResult.message && fsResult.message.toLowerCase().includes('activation'));
+                const result = await res.json();
 
-                // 2. Send branded welcome email to subscriber via Brevo
-                await fetch('https://api.brevo.com/v3/smtp/email', {
-                    method: 'POST',
-                    headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        sender: { name: 'Aman | Awaraman', email: 'hello@awaraman.com' },
-                        to: [{ email: userEmail, name: userName }],
-                        subject: 'Welcome to the journey',
-                        textContent: 'Namaste Ji,\n\nYou\'re in. Thank you for subscribing to Awaraman.\n\nThis inbox will occasionally receive stories from places I\'ve been, thoughts I\'ve had, and letters I\'ve written. Nothing rushed, nothing spammy, just honest writing when something is worth sharing.\n\nSee you on the road.\n\nAman'
-                    })
-                });
+                // Formsubmit returns success:"true" once activated; during first-time activation it
+                // returns a message about an activation email — treat that as a soft-success too.
+                const ok = result.success === 'true' ||
+                           (result.message && result.message.toLowerCase().includes('activation'));
 
-                if (notified) {
-                    nlStatus.className = 'form-status success';
-                    nlStatus.textContent = '\u2713 You\'re subscribed! Welcome to the journey.';
+                if (ok) {
+                    nlStatus.className   = 'form-status success';
+                    nlStatus.textContent = '\u2713 You\'re subscribed! A welcome email is on its way.';
                     nlForm.reset();
                 } else {
-                    throw new Error('Formsubmit error');
+                    throw new Error('Formsubmit returned failure');
                 }
             } catch {
-                nlStatus.className = 'form-status error';
+                nlStatus.className   = 'form-status error';
                 nlStatus.textContent = '\u26a0 Something went wrong. Please try again or email hello@awaraman.com.';
             } finally {
                 nlBtn.textContent = originalText;
@@ -242,4 +245,5 @@
 </body>
 
 </html>
+
 
