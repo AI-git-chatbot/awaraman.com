@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>You're In — Awaraman</title>
+    <link rel="icon" href="images/logo.JPG" type="image/jpeg">
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-dark, #0e0e0e);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .thanks-card {
+            max-width: 520px;
+            background: var(--bg-card, #1a1a1a);
+            border: 1px solid rgba(180, 140, 60, 0.2);
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .thanks-icon {
+            font-size: 3rem;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .thanks-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--text-light, #f4f0e8);
+            margin: 0 0 0.75rem;
+            line-height: 1.2;
+        }
+
+        .thanks-title em {
+            color: var(--gold, #b48c3c);
+            font-style: italic;
+        }
+
+        .thanks-sub {
+            color: var(--text-muted, #888);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0 0 2rem;
+        }
+
+        .thanks-redirect {
+            font-size: 0.82rem;
+            color: var(--text-muted, #888);
+            margin-top: 1.5rem;
+        }
+
+        .thanks-redirect a {
+            color: var(--gold, #b48c3c);
+            text-decoration: none;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--gold, #b48c3c);
+            color: #0e0e0e;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn-back:hover {
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="thanks-card">
+        <span class="thanks-icon">✈️</span>
+        <h1 class="thanks-title">You're <em>In</em>.</h1>
+        <p class="thanks-sub">
+            Namaste Ji — welcome aboard.<br>
+            A confirmation is headed to your inbox. Honest writing, no spam, only when something is worth sharing.
+        </p>
+        <a href="newsletter.html" class="btn-back">Back to Newsletter</a>
+        <p class="thanks-redirect">
+            You'll be redirected automatically in <span id="countdown">5</span>s.
+            <br>
+            <a href="newsletter.html">Click here if nothing happens.</a>
+        </p>
+    </div>
+
+    <script>
+        let seconds = 5;
+        const el = document.getElementById('countdown');
+        const timer = setInterval(() => {
+            seconds--;
+            el.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = 'newsletter.html';
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>

@@ -189,62 +189,61 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/global.js"></script>
-    <script>
-        // â”€â”€ Contact Form â€” Formsubmit (notify Aman) + Brevo (auto-reply) â”€â”€
+        <script>
+        // -- Contact Form: Formsubmit (notify Aman) + EmailJS (auto-reply to sender) --
+        emailjs.init('HhpD5hTawRKWcawcW');
+
         const contactForm   = document.getElementById('contactForm');
         const contactBtn    = document.getElementById('contactSubmitBtn');
         const contactStatus = document.getElementById('contactStatus');
 
-        const BREVO_KEY = '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';
-
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const originalText = contactBtn.textContent;
-            contactBtn.textContent = 'Sending\u2026';
+            contactBtn.textContent = 'Sending...';
             contactBtn.classList.add('btn-loading');
             contactStatus.className = 'form-status';
             contactStatus.textContent = '';
 
             const userEmail = document.getElementById('email').value;
             const userName  = document.getElementById('name').value;
+            const userMsg   = document.getElementById('message').value;
 
-            const data = new FormData(contactForm);
+            const data    = new FormData(contactForm);
             const payload = Object.fromEntries(data.entries());
-            payload['_subject']  = 'New Contact Message \u2014 Awaraman';
+            payload['_replyto']  = userEmail;
+            payload['_subject']  = 'New Contact Message from ' + userName + ' - Awaraman';
             payload['_template'] = 'table';
 
             try {
                 // 1. Notify Aman via Formsubmit
-                const fsRes = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
-                    method: 'POST',
+                const fsRes    = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
+                    method:  'POST',
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body:    JSON.stringify(payload)
                 });
                 const fsResult = await fsRes.json();
-                const notified = fsResult.success === 'true' || (fsResult.message && fsResult.message.toLowerCase().includes('activation'));
+                const ok = fsResult.success === 'true' ||
+                           (fsResult.message && fsResult.message.toLowerCase().includes('activation'));
 
-                // 2. Branded auto-reply to user via Brevo (from hello@awaraman.com)
-                await fetch('https://api.brevo.com/v3/smtp/email', {
-                    method: 'POST',
-                    headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        sender: { name: 'Aman | Awaraman', email: 'hello@awaraman.com' },
-                        to: [{ email: userEmail, name: userName }],
-                        subject: 'Thanks for reaching out',
-                        textContent: 'Namaste Ji,\n\nThanks for writing in, I\'ve received your message and will reply as soon as I can.\n\nAman'
-                    })
+                // 2. Auto-reply to sender via EmailJS
+                await emailjs.send('service_uywd0ve', 'template_8t251zq', {
+                    to_name:  userName,
+                    to_email: userEmail,
+                    message:  userMsg
                 });
 
-                if (notified) {
-                    contactStatus.className = 'form-status success';
-                    contactStatus.textContent = '\u2713 Message sent! I\'ll get back to you soon.';
+                if (ok) {
+                    contactStatus.className   = 'form-status success';
+                    contactStatus.textContent = '\u2713 Message sent! I\u2019ll get back to you soon.';
                     contactForm.reset();
                 } else {
                     throw new Error('error');
                 }
             } catch {
-                contactStatus.className = 'form-status error';
+                contactStatus.className   = 'form-status error';
                 contactStatus.textContent = '\u26a0 Something went wrong. Please email hello@awaraman.com directly.';
             } finally {
                 contactBtn.textContent = originalText;

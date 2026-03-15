@@ -109,7 +109,7 @@
                     <h3>Subscribe</h3>
                     <p>Join wanderers who read slowly and think deeply. One email at a time.</p>
 
-                    <form class="newsletter-form" id="newsletterForm">
+                    <form class="newsletter-form" action="https://formsubmit.co/hello@awaraman.com" method="POST">
                         <div class="form-group">
                             <label for="nl-name">Your Name</label>
                             <input type="text" id="nl-name" name="name" placeholder="Your name" required>
@@ -122,9 +122,9 @@
                         <input type="hidden" name="_subject" value="New Newsletter Subscriber — Awaraman">
                         <input type="hidden" name="type" value="newsletter_subscription">
                         <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
-                        <!-- Auto-reply welcome email sent to subscriber -->
-                        <input type="hidden" id="nl-replyto" name="_replyto" value="">
+                        <!-- Redirect to our branded thank-you page -->
+                        <input type="hidden" name="_next" value="https://awaraman.com/subscribed.html">
+                        <!-- Auto-reply welcome email: _replyto must be the email field name -->
                         <input type="hidden" name="_autoresponse" value="Namaste Ji,
 
 You're in. Thank you for subscribing to Awaraman.
@@ -135,9 +135,7 @@ See you on the road.
 
 Aman
 awaraman.com">
-                        <button type="submit" class="btn btn-primary" id="nlSubmitBtn"
-                            style="width:100%">Subscribe Now</button>
-                        <div class="form-status" id="nlStatus"></div>
+                        <button type="submit" class="btn btn-primary" style="width:100%">Subscribe Now</button>
                     </form>
 
                     <p class="newsletter-note">🔒 Your email is safe. No spam, ever. Unsubscribe anytime by replying
@@ -191,59 +189,7 @@ awaraman.com">
     </footer>
 
     <script src="js/global.js"></script>
-    <script>
-        // ── Newsletter Form — Formsubmit.co async submit ───────
-        const nlForm   = document.getElementById('newsletterForm');
-        const nlBtn    = document.getElementById('nlSubmitBtn');
-        const nlStatus = document.getElementById('nlStatus');
-
-        nlForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const originalText = nlBtn.textContent;
-            nlBtn.textContent = 'Subscribing\u2026';
-            nlBtn.classList.add('btn-loading');
-            nlStatus.className = 'form-status';
-            nlStatus.textContent = '';
-
-            const userEmail = document.getElementById('nl-email').value;
-
-            // Sync subscriber email into _replyto so Formsubmit sends the welcome auto-reply
-            document.getElementById('nl-replyto').value = userEmail;
-
-            const data    = new FormData(nlForm);
-            const payload = Object.fromEntries(data.entries());
-
-            try {
-                const res    = await fetch('https://formsubmit.co/ajax/hello@awaraman.com', {
-                    method:  'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body:    JSON.stringify(payload)
-                });
-                const result = await res.json();
-
-                // Formsubmit returns success:"true" once activated; during first-time activation it
-                // returns a message about an activation email — treat that as a soft-success too.
-                const ok = result.success === 'true' ||
-                           (result.message && result.message.toLowerCase().includes('activation'));
-
-                if (ok) {
-                    nlStatus.className   = 'form-status success';
-                    nlStatus.textContent = '\u2713 You\'re subscribed! A welcome email is on its way.';
-                    nlForm.reset();
-                } else {
-                    throw new Error('Formsubmit returned failure');
-                }
-            } catch {
-                nlStatus.className   = 'form-status error';
-                nlStatus.textContent = '\u26a0 Something went wrong. Please try again or email hello@awaraman.com.';
-            } finally {
-                nlBtn.textContent = originalText;
-                nlBtn.classList.remove('btn-loading');
-            }
-        });
-    </script>
 </body>
 
 </html>
-
 
